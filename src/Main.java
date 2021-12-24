@@ -6,7 +6,7 @@ import graph.Graph;
 public class Main {
     public static void main(String[] args ) throws FileNotFoundException {
         Scanner s;
-        if (args[0] != null) {
+        if (args.length > 0) {
             s = new Scanner(new File("data/graph-10" + args[0] + ".alists"));
         } else {
             s = new Scanner(System.in);

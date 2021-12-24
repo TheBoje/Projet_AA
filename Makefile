@@ -30,8 +30,5 @@ main: mk classes
 gen: mk classes
 	java -cp .:lib -jar lib/randomdag.jar 15 0.3 | java $(JFLAGS) Main
 
-red: classes
-	java $(JFLAGS) Main
-
 clean:
 	$(RM) build

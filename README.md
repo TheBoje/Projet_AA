@@ -26,7 +26,13 @@ make main ARGS=X
 make main ARGS=1
 ```
 
-Avec `X` le numéro du graphe en question, allant de 0 à 7 (contenu dans le dossier `data`)
+Avec `X` le numéro du graphe en question, allant de 0 à 7 (contenu dans le dossier `data`).
+
+Il est aussi possible de lancer avec un fichier autre via :
+
+```bash
+make main < /chemin/vers/le/fichier
+```
 
 ### Avec entrée d'un graphe aléatoire
 
