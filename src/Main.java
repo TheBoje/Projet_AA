@@ -1,9 +1,17 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 import graph.Graph;
 
 public class Main {
-    public static void main(String[] args ) {
-        Scanner s = new Scanner(System.in);
+    public static void main(String[] args ) throws FileNotFoundException {
+        Scanner s;
+        if (args[0] != null) {
+            s = new Scanner(new File("data/graph-10" + args[0] + ".alists"));
+        } else {
+            s = new Scanner(System.in);
+        }
+
         int n = s.nextInt();
         Graph g = new Graph(n);
 
@@ -19,5 +27,7 @@ public class Main {
         }
         s.close();
         System.out.println(g);
+
+        System.out.println(g.topologicalSort());
     }
 }

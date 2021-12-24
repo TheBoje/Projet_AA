@@ -1,17 +1,18 @@
 package graph;
 
 import java.util.ArrayList;
+import java.util.Stack;
 
 public class Graph {
-    private int _n; // Nombre de vertices
+    private int _order; // Nombre de vertices
     private ArrayList<Node> _nodes; // Noeuds du graphe
 
     public Graph(int n) {
-        _n = n;
+        _order = n;
         // Initialise la liste de noeuds
-        _nodes = new ArrayList<>(_n);
-        for (int i = 0; i < _n; i++) {
-            _nodes.add(new Node());
+        _nodes = new ArrayList<>(_order);
+        for (int i = 0; i < _order; i++) {
+            _nodes.add(new Node(i));
         }
     }
 
@@ -25,10 +26,47 @@ public class Graph {
     // Affichage
     @Override
     public String toString() {
-        String res = _n + "\n";
-        for (int i = 0; i < _n; i++) {
+        String res = _order + "\n";
+        for (int i = 0; i < _order; i++) {
 
             res += (i + 1) + " " + _nodes.get(i) + "\n";
+        }
+        return res;
+    }
+
+    private void topologicalAux(Node n, Stack<Node> s) {
+        if (n.getColor() == Color.YELLOW) {
+            throw new CyclicGraphException();
+        } else if (n.getColor() == Color.RED) {   
+            n.setColor(Color.YELLOW);
+            
+            ArrayList<Integer> n_adj = n.getAdj();
+            for (int i = 0; i < n_adj.size(); i++) {
+                topologicalAux(_nodes.get(n_adj.get(i) - 1), s);
+            }
+            
+            s.push(n);
+            n.setColor(Color.GREEN);
+        }
+    }
+
+    public String topologicalSort() {
+        Stack<Node> stack = new Stack<>();
+
+        // Initialise tous les noeuds à non-visité
+        for (Node n : _nodes) {
+            n.setColor(Color.RED);
+        }
+
+        for (Node n : _nodes) {
+            if (n.getColor() == Color.RED) {
+                topologicalAux(n, stack);
+            }
+        }
+        
+        String res = "";
+        while (!stack.empty()) {
+            res += (stack.pop().getIndex() + 1) + " ";
         }
         return res;
     }
