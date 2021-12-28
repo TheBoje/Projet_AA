@@ -1,7 +1,7 @@
 package graph;
 
 public enum Color {
-    GREEN,
-    YELLOW, 
-    RED
+    GREEN,  // Visited
+    YELLOW, // Visitable
+    RED     // Not Visitable
 }

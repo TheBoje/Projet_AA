@@ -5,6 +5,7 @@ import graph.Graph;
 
 public class Main {
     public static void main(String[] args ) throws FileNotFoundException {
+        // Init console reader, from either file or stdin
         Scanner s;
         if (args.length > 0) {
             s = new Scanner(new File("data/graph-10" + args[0] + ".alists"));
@@ -12,9 +13,10 @@ public class Main {
             s = new Scanner(System.in);
         }
 
+
+        // Building graph from input
         int n = s.nextInt();
         Graph g = new Graph(n);
-
         for (int i = 0; i < n; i++) {
             int from = s.nextInt();
             int to = -1;
@@ -26,8 +28,12 @@ public class Main {
             } while (to != 0);
         }
         s.close();
-        System.out.println(g);
 
-        System.out.println(g.topologicalSort());
+        // Graph's toString() is overridden
+        // System.out.println(g);
+        
+        System.out.println("Result sort : " + g.topologicalSort());
+
+        System.out.println("Is valid : " + (Graph.isValidTopologicalSort(g.topologicalSort(), g) ? "true" : "false"));
     }
 }

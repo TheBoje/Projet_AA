@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class Node {
     int _index;
-    ArrayList<Integer> _adj; // Liste d'adjacence du noeud
-    Color _color = Color.RED; // Couleur du noeud
+    ArrayList<Integer> _adj; // Adjacency list of the node
+    Color _color = Color.RED; // Color of the node
 
     public Node(int index) {
         _index = index;
